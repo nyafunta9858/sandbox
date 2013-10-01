@@ -14,7 +14,9 @@ import android.view.View;
 import android.widget.ListView;
 
 public class MainActivity extends ListActivity {
-    private static final String RSS_FEED_URL = "http://itpro.nikkeibp.co.jp/rss/ITpro.rdf";
+//    private static final String RSS_FEED_URL = "http://itpro.nikkeibp.co.jp/rss/ITpro.rdf";
+    private static final String RSS_FEED_URL = "http://namabolic.exblog.jp/index.xml";
+//    private static final String RSS_FEED_URL = "http://www.engadget.com/rss.xml";
     public static final int MENU_ITEM_RELOAD = Menu.FIRST;
     private RssListAdapter mAdapter;
     private ArrayList<Item> mItems;
@@ -40,6 +42,9 @@ public class MainActivity extends ListActivity {
         Intent intent = new Intent(this, ItemDetailActivity.class);
         intent.putExtra("TITLE", item.getTitle());
         intent.putExtra("DESCRIPTION", item.getDescription());
+        intent.putExtra("DATE", item.getDate());
+        intent.putExtra("CREATOR", item.getCreator());
+        intent.putExtra("LINK", item.getLink());
         startActivity(intent);
     }
 

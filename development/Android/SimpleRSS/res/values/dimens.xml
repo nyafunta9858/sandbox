@@ -4,4 +4,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- ListView -->
+    <dimen name="item_thumb">50dp</dimen>
+
 </resources>

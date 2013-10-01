@@ -1,7 +1,9 @@
 package com.example.simplerss;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -9,9 +11,11 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.util.Xml;
 
 public class RssParserTask extends AsyncTask<String, Integer, RssListAdapter> {
+    private static final String TAG = RssParserTask.class.getSimpleName();
     private MainActivity mActivity;
     private RssListAdapter mAdapter;
     private ProgressDialog mProgressDialog;
@@ -54,12 +58,27 @@ public class RssParserTask extends AsyncTask<String, Integer, RssListAdapter> {
         mActivity.setListAdapter(result);
     }
 
+    private static String inputStreemToString(InputStream is) throws IOException{
+        BufferedReader reader = 
+                new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        StringBuffer buf = new StringBuffer();
+        String str;
+        while ((str = reader.readLine()) != null) {
+            buf.append(str);
+            buf.append("\n");
+        }
+        return buf.toString();
+    }
+
     // XMLをパースする
     public RssListAdapter parseXml(InputStream is) throws IOException, XmlPullParserException {
         XmlPullParser parser = Xml.newPullParser();
         try {
             parser.setInput(is, null);
+//            Log.d(TAG, inputStreemToString(is));
+
             int eventType = parser.getEventType();
+
             Item currentItem = null;
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 String tag = null;
@@ -73,6 +92,12 @@ public class RssParserTask extends AsyncTask<String, Integer, RssListAdapter> {
                                 currentItem.setTitle(parser.nextText());
                             } else if (tag.equals("description")) {
                                 currentItem.setDescription(parser.nextText());
+                            } else if (tag.equals("date")) {
+                                currentItem.setDate(parser.nextText());
+                            } else if (tag.equals("creator")) {
+                                currentItem.setCreator(parser.nextText());
+                            } else if (tag.equals("link")) {
+                                currentItem.setLink(parser.nextText());
                             }
                         }
                         break;
