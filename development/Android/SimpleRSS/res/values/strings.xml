@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SimpleRSS</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="adunit">a151e797f9dcaf5</string>
+    <string name="addevice">a57f7aa150567d4e</string>
+
+</resources>
