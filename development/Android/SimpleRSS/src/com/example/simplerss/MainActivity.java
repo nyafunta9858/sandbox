@@ -52,7 +52,7 @@ public class MainActivity extends ListActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.isLongPress()) {
             if (KeyEvent.KEYCODE_MENU == keyCode) {
-                mItems = new ArrayList();
+                mItems = new ArrayList<Item>();
                 mAdapter = new RssListAdapter(this, mItems);
                 // タスクはその都度生成する
                 RssParserTask task = new RssParserTask(this, mAdapter);
@@ -76,7 +76,7 @@ public class MainActivity extends ListActivity {
             // 更新
             case MENU_ITEM_RELOAD:
                 // アダプタを初期化し、タスクを起動する
-                mItems = new ArrayList();
+                mItems = new ArrayList<Item>();
                 mAdapter = new RssListAdapter(this, mItems);
                 // タスクはその都度生成する
                 RssParserTask task = new RssParserTask(this, mAdapter);

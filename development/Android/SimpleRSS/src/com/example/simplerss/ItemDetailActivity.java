@@ -1,7 +1,5 @@
 package com.example.simplerss;
 
-import java.util.ArrayList;
-
 import com.google.ads.*;
 
 import android.app.Activity;
